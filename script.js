@@ -58,19 +58,11 @@ function playRound(getHumanChoice, getComputerChoice) {
 
     if (user === ai) {
         console.log("It's a tie! " + humanScore + "-" + computerScore);
-    } else if (user === 0 && ai === 1) {
-        computerScore += 1;
-        console.log("Computer wins this round! " + humanScore + "-" + computerScore);
-    } else if (user === 0 && ai === 2) {
-        humanScore += 1;
-        console.log("User wins this round! " + humanScore + "-" + computerScore);
-    } else if (user === 1 && ai === 0) {
-        humanScore += 1;
-        console.log("User wins this round! " + humanScore + "-" + computerScore);
-    } else if (user === 1 && ai === 2) {
-        computerScore += 1;
-        console.log("Computer wins this round! " + humanScore + "-" + computerScore);
-    } else if (user === 2 && ai == 0) {
+    } else if (
+        (user === 0 && ai === 1) ||
+        (user === 1 && ai === 2) ||
+        (user === 2 && ai == 0)
+    ) {
         computerScore += 1;
         console.log("Computer wins this round! " + humanScore + "-" + computerScore);
     } else {
