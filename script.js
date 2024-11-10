@@ -23,8 +23,7 @@ function getHumanChoice() {
         }
     } 
 
-    input = +input; // Converts to number because prompt() returns a string
-    return input;
+    return +input; // Converts to number because prompt() returns a string
 }
 
 // Generates random integer: 0 to max - 1
