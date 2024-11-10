@@ -49,30 +49,55 @@ function getComputerChoice() {
     return computer;
 }
 
-let humanScore = 0;
-let computerScore = 0;
-
+// Initializes a round
 function playRound(getHumanChoice, getComputerChoice) {
-    console.log("Initializing the game...");
+    console.log("\nNew round started.");
 
     let user = getHumanChoice();
     let ai = getComputerChoice();
 
     if (user === ai) {
-        console.log("It's a tie!");
+        console.log("It's a tie! " + humanScore + "-" + computerScore);
     } else if (user === 0 && ai === 1) {
-        console.log("Computer wins this round!");
+        computerScore += 1;
+        console.log("Computer wins this round! " + humanScore + "-" + computerScore);
     } else if (user === 0 && ai === 2) {
-        console.log("User wins this round!");
+        humanScore += 1;
+        console.log("User wins this round! " + humanScore + "-" + computerScore);
     } else if (user === 1 && ai === 0) {
-        console.log("User wins this round!");
+        humanScore += 1;
+        console.log("User wins this round! " + humanScore + "-" + computerScore);
     } else if (user === 1 && ai === 2) {
-        console.log("Computer wins this round!");
+        computerScore += 1;
+        console.log("Computer wins this round! " + humanScore + "-" + computerScore);
     } else if (user === 2 && ai == 0) {
-        console.log("Computer wins this round!");
+        computerScore += 1;
+        console.log("Computer wins this round! " + humanScore + "-" + computerScore);
     } else {
-        console.log("User wins this round!");
+        humanScore += 1;
+        console.log("User wins this round! " + humanScore + "-" + computerScore);
+
     }
 }
 
-playRound(getHumanChoice, getComputerChoice);
+// Starts the game
+function playGame() {
+    console.log("Core system activated!");
+    console.log("All systems go!");
+    console.log("Initializing 5 rounds of Rock Paper Scissors game...");
+
+    while (humanScore + computerScore < 5) {
+        playRound(getHumanChoice, getComputerChoice);
+    } 
+
+    if (humanScore >= 3) {
+        console.log("\nUSER WON!");
+    } else {
+        console.log("\nCOMPUTER WON!");
+    }
+}
+
+let humanScore = 0;
+let computerScore = 0;
+
+playGame();
