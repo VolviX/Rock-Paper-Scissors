@@ -6,7 +6,10 @@ function getHumanChoice() {
     while (inputChecker === true) {
         input = prompt("Type 0 for rock, 1 for paper, 2 for scisscors: ");  
     
-        if (input == 0 || input == 1 || input == 2) {
+        // Check if input is empty or invalid
+        if (input === "" || input === null) {
+            console.log("Invalid choice, try again.");
+        } else if (input == 0 || input == 1 || input == 2) {
             inputChecker = false;
             if (input == 0) {
                 console.log("USER: ROCK");
@@ -20,7 +23,7 @@ function getHumanChoice() {
         }
     } 
 
-    input = +input; // Converts to number because prompt() gets string
+    input = +input; // Converts to number because prompt() returns a string
     return input;
 }
 
