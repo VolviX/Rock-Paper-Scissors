@@ -4,7 +4,7 @@ function getHumanChoice() {
     let inputChecker = true;
 
     while (inputChecker === true) {
-        input = prompt("Type 0 for Rock, 1 for Paper, 2 for Scisscors: ");  
+        input = prompt("Type 0 for Rock, 1 for Paper, 2 for Scissors: ");  
     
         // Check if input is empty or invalid
         if ((input === "") || (input === " ")) {
