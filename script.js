@@ -7,7 +7,7 @@ function getHumanChoice() {
         input = prompt("Type 0 for Rock, 1 for Paper, 2 for Scisscors: ");  
     
         // Check if input is empty or invalid
-        if (input === "" || input === null) {
+        if ((input === "") || (input === " ")) {
             console.log("Invalid choice, try again.");
         } else if (input == 0 || input == 1 || input == 2) {
             inputChecker = false;
@@ -18,6 +18,8 @@ function getHumanChoice() {
             } else {
                 console.log("USER: SCISSORS");
             }
+        } else if (input === null) {
+            return null;
         } else {
             console.log("Invalid choice, try again.");
         }
@@ -53,6 +55,12 @@ function playRound() {
     console.log("\nNew round started.");
 
     let user = getHumanChoice();
+
+    if (user === null) {
+        console.log("User is exiting the game.");
+        return user;
+    } 
+
     let ai = getComputerChoice();
 
     if (user === ai) {
@@ -67,8 +75,9 @@ function playRound() {
     } else {
         humanScore += 1;
         console.log("User wins this round! " + humanScore + "-" + computerScore);
-
     }
+
+    return user;
 }
 
 // Starts the game
@@ -77,11 +86,18 @@ function playGame() {
     console.log("All systems go!");
     console.log("Initializing 5 rounds of Rock Paper Scissors game...");
 
+    let checkCancel;
+
     while (humanScore + computerScore < 5) {
-        playRound();
+        checkCancel = playRound();
+        if (checkCancel === null) {
+            break;
+        }
     } 
 
-    if (humanScore >= 3) {
+    if (checkCancel === null) {
+        console.log("All system shutdown.");
+    } else if (humanScore >= 3) {
         console.log("\nUSER WON!");
     } else {
         console.log("\nCOMPUTER WON!");
