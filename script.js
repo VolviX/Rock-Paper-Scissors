@@ -49,7 +49,7 @@ function getComputerChoice() {
 }
 
 // Initializes a round
-function playRound(getHumanChoice, getComputerChoice) {
+function playRound() {
     console.log("\nNew round started.");
 
     let user = getHumanChoice();
@@ -78,7 +78,7 @@ function playGame() {
     console.log("Initializing 5 rounds of Rock Paper Scissors game...");
 
     while (humanScore + computerScore < 5) {
-        playRound(getHumanChoice, getComputerChoice);
+        playRound();
     } 
 
     if (humanScore >= 3) {
