@@ -1,19 +1,20 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    margin: 0px;
+    padding: 0px;
 }
 
-.title, .description {
-    margin: 24px;
+h1, p, .button-group {
+    margin: 20px;
 }
 
 .button-group {
     display: flex;
-    padding-top: 12px;
+    justify-content: center;
+    align-items: center;
     gap: 50px;
-    padding-top: 50px;
 }
 
 button {

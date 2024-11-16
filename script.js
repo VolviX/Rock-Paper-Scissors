@@ -1,33 +1,3 @@
-// Asks user input 
-function getHumanChoice() {
-    let input;
-    let inputChecker = true;
-
-    while (inputChecker === true) {
-        input = prompt("Type 0 for Rock, 1 for Paper, 2 for Scissors: ");  
-    
-        // Check if input is empty or invalid
-        if ((input === "") || (input === " ")) {
-            console.log("Invalid choice, try again.");
-        } else if (input == 0 || input == 1 || input == 2) {
-            inputChecker = false;
-            if (input == 0) {
-                console.log("USER: ROCK");
-            } else if (input == 1) {
-                console.log("USER: PAPER");
-            } else {
-                console.log("USER: SCISSORS");
-            }
-        } else if (input === null) {
-            return null;
-        } else {
-            console.log("Invalid choice, try again.");
-        }
-    } 
-
-    return +input; // Converts to number because prompt() returns a string
-}
-
 // Generates random integer: 0 to max - 1
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -38,73 +8,59 @@ function getComputerChoice() {
     let computer = getRandomInt(3);
 
     if (computer == 0) {
-        console.log("COMPUTER: ROCK");
-
+        return 'ROCK';
     } else if (computer == 1) {
-        console.log("COMPUTER: PAPER");
-
+        return 'PAPER';
     } else {
-        console.log("COMPUTER: SCISSORS");
+        return 'SCISSORS';
     }
-
-    return computer;
 }
 
 // Initializes a round
-function playRound() {
-    console.log("\nNew round started.");
+function playRound(playerSelection) {
 
-    let user = getHumanChoice();
-
-    if (user === null) {
-        console.log("User is exiting the game.");
-        return user;
-    } 
-
+    let user = playerSelection;
     let ai = getComputerChoice();
+    let currentScore = humanScore + '-' + computerScore;
 
-    if (user === ai) {
-        console.log("It's a tie! " + humanScore + "-" + computerScore);
+    ui.textContent = `USER: ${user}`;
+    content.textContent = `AI: ${ai}`;
+
+    if (user == ai) {
+        score.textContent = `Its a tie! ${currentScore}`;
     } else if (
-        (user === 0 && ai === 1) ||
-        (user === 1 && ai === 2) ||
-        (user === 2 && ai == 0)
+        (user === 'ROCK' && ai === 'PAPER') ||
+        (user === 'PAPER' && ai === 'SCISSORS') ||
+        (user === 'SCISSORS' && ai === 'ROCK')
     ) {
         computerScore += 1;
-        console.log("Computer wins this round! " + humanScore + "-" + computerScore);
+        score.textContent = `AI wins this round! ${currentScore}`;
     } else {
         humanScore += 1;
-        console.log("User wins this round! " + humanScore + "-" + computerScore);
+        score.textContent = `User wins this round! ${currentScore}`;
     }
 
     return user;
 }
 
-// Starts the game
-function playGame() {
-    console.log("Core system activated!");
-    console.log("All systems go!");
-    console.log("Initializing 5 rounds of Rock Paper Scissors game...");
-
-    let checkCancel;
-
-    while (humanScore + computerScore < 5) {
-        checkCancel = playRound();
-        if (checkCancel === null) {
-            break;
-        }
-    } 
-
-    if (checkCancel === null) {
-        console.log("All system shutdown.");
-    } else if (humanScore >= 3) {
-        console.log("\nUSER WON!");
-    } else {
-        console.log("\nCOMPUTER WON!");
-    }
-}
-
 let humanScore = 0;
 let computerScore = 0;
 
-playGame();
+const ui = document.querySelector('.description');
+const content = document.querySelector('.content');
+const score = document.querySelector('.score');
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
+rock.addEventListener('click', () => {
+    playRound('ROCK');
+});
+
+paper.addEventListener('click', () => {
+    playRound('PAPER');
+});
+
+scissors.addEventListener('click', () => {
+    playRound('SCISSORS');
+});
