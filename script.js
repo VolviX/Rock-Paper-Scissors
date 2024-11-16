@@ -21,26 +21,48 @@ function playRound(playerSelection) {
 
     let user = playerSelection;
     let ai = getComputerChoice();
-    let currentScore = humanScore + '-' + computerScore;
 
     ui.textContent = `USER: ${user}`;
     content.textContent = `AI: ${ai}`;
 
     if (user == ai) {
-        score.textContent = `Its a tie! ${currentScore}`;
+        tie.play();
+        score.textContent = `Its a tie! ${humanScore} - ${computerScore}`;
     } else if (
         (user === 'ROCK' && ai === 'PAPER') ||
         (user === 'PAPER' && ai === 'SCISSORS') ||
         (user === 'SCISSORS' && ai === 'ROCK')
     ) {
+        lose.play();
         computerScore += 1;
-        score.textContent = `AI wins this round! ${currentScore}`;
+        score.textContent = `AI wins this round! ${humanScore} - ${computerScore}`;
     } else {
+        win.play();
         humanScore += 1;
-        score.textContent = `User wins this round! ${currentScore}`;
+        score.textContent = `User wins this round! ${humanScore} - ${computerScore}`;
     }
 
-    return user;
+    if (humanScore === 5 || computerScore === 5) {
+        rock.remove();
+        paper.remove();
+        scissors.remove();
+
+        const gameOver = document.createElement('p');
+        document.body.appendChild(gameOver);
+        
+        if (humanScore === 5) {
+            won.play();
+            gameOver.textContent = 'YOU WON!';
+        } else {
+            lost.play();
+            gameOver.textContent = 'GAME OVER!';
+        }
+
+        const replay = document.createElement('button');
+        document.body.appendChild(replay);
+        replay.textContent = 'PLAY AGAIN';
+        replay.addEventListener('click', () => location.reload());
+    }
 }
 
 let humanScore = 0;
@@ -52,6 +74,12 @@ const score = document.querySelector('.score');
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
+
+const won = document.querySelector('#won');
+const lost = document.querySelector('#lost');
+const win = document.querySelector('#win');
+const lose = document.querySelector('#lose');
+const tie = document.querySelector('#tie');
 
 rock.addEventListener('click', () => {
     playRound('ROCK');
