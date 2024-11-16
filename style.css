@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title, .description {
+    margin: 24px;
+}
+
+.button-group {
+    display: flex;
+    padding-top: 12px;
+    gap: 50px;
+    padding-top: 50px;
+}
+
+button {
+    width: 125px;
+    height: 50px;
+}
